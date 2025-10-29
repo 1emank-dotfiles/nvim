@@ -18,6 +18,6 @@ $missing_deps && exit 1
 
 repo_dir="$(dirname "$( realpath "$0")" )"
 
-rsync "$HOME/.config/nvim" "$repo_dir" --delete --recursive
-rm "$repo_dir/nvim/lazy-lock.json"
-rm "$repo_dir/nvim/.neoconf.json"
+rsync -v "$HOME/.config/nvim" "$repo_dir" --delete --recursive
+rm -v "$repo_dir/nvim/lazy-lock.json"
+rm -v "$repo_dir/nvim/.neoconf.json"
