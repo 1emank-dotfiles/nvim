@@ -1,21 +1,21 @@
 #!/bin/sh
 set -e
-
-missing_deps=false
-exists() { 
-    if ! command -v "$1" >/dev/null 2>&1; then
-        echo The program "$1" is missing, you need to install it 1>&2
-        missing_deps=true
-    fi
+check_dependencies() {
+        missing_deps=false
+        while [ -n "$1" ]; do
+                if ! command -v "$1" >/dev/null 2>&1; then
+                        echo "$1" is missing 1>&2
+                        missing_deps=true
+                fi
+                shift
+        done
+        if $missing_deps; then
+                echo; echo The operation cannot proceed
+                exit 1
+        fi
 }
-
-exists git
-exists rsync
-exists realpath
-exists dirname
-
-$missing_deps && exit 1
+check_dependencies git rsync realpath dirname
 
 repo_dir="$(dirname "$( realpath "$0")" )"
 
-rsync "$repo_dir" ~/.config --delete --recursive
+rsync -v "$repo_dir/nvim" ~/.config --delete --recursive

@@ -56,5 +56,5 @@ lazy.setup({
     spec = get_modules(),
     defaults = { lazy = true },
     install = { colorscheme = { 'github_dark_default' } },
-    checker = { enabled = true },
+    -- checker = { enabled = false },
 })
