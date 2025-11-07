@@ -1,8 +1,9 @@
-local function blink_build()
-    if vim.fn.executable('rustup') == 1 then
-        return 'cargo +nightly build --release'
-    end
-    return nil
+local blink_build
+local blink_ver
+if vim.fn.executable('rustup') == 1 then
+    blink_build = 'cargo +nightly build --release'
+else
+    blink_ver = '1.*'
 end
 
 return {
@@ -17,8 +18,9 @@ return {
     },
     {
         'saghen/blink.cmp',
-        build = blink_build(),
-        event = 'BufReadPre',
+        build = blink_build,
+        version = blink_ver,
+        lazy = false,
         opts = {
             keymap = {
                 preset = 'none',
@@ -48,7 +50,7 @@ return {
     },
     {
         'L3MON4D3/LuaSnip',
-        event = 'BufReadPre',
+        lazy = false,
         build = 'make install_jsregexp',
         opts = {},
         keys = {
