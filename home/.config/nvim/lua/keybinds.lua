@@ -53,7 +53,7 @@ set(all_modes, '<leader><A-b>', '<cmd>tabclose<cr>', { desc = 'Close tab' })
 set(all_modes, '<A-n>', '<cmd>tabnext<cr>', { desc = 'Next tab' })
 set(all_modes, '<A-b>', '<cmd>tabpre<cr>', { desc = 'Previous tab' })
 -- set(all_modes, '<A-x>', close_hidden_buffers, { desc = 'Close hidden buffers } )
-set('t', '<Esc>', term_to_normal)
+set('t', '<Esc><Esc>', term_to_normal)
 
 set('n', '+', '$', { desc = 'End of line' })
 set('v', '+', '$h', { desc = 'End of line' })

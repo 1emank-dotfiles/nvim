@@ -399,12 +399,14 @@ local function config()
             },
         },
     }
-    vim.lsp.enable({
+
+    local lsps = {
         -- from package manager
         'texlab',
         'clangd',
         'lua_ls',
         'markdown_oxide',
+        'superhtml',
         -- from npm
         'bashls',
         'awk_ls',
@@ -414,11 +416,24 @@ local function config()
         'cssls',
         -- other
         'rust_analyzer',
-    })
+    }
+
+    local missing = {}
+    for _, v in ipairs(lsps) do
+        local command = vim.lsp.config[v].cmd[1]
+        if vim.fn.executable(command) ~= 1 then
+            table.insert(missing, command)
+        end
+    end
+    if table.maxn(missing) ~= 0 then
+        vim.notify(table.concat(missing, '\n'), vim.log.levels.WARN)
+    end
+
+    vim.lsp.enable(lsps)
 end
 
 return {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPre',
+    lazy = false,
     config = config,
 }

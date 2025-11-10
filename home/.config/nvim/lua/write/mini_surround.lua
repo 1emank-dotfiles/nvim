@@ -1,6 +1,6 @@
 return {
     'nvim-mini/mini.surround',
-    event = 'BufReadPre',
+    keys = { '<leader>s' }, -- TODO: improve
     opts = {
         mappings = {
             add = 'sa', -- Add surrounding in Normal and Visual modes
