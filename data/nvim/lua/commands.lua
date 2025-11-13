@@ -2,16 +2,15 @@ local command = vim.api.nvim_create_user_command
 local autocmd = vim.api.nvim_create_autocmd
 local timer = (vim.uv or vim.loop).new_timer
 
-autocmd("LspAttach", {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if client and client.server_capabilities.semanticTokensProvider and client.name ~= "null-ls" then
-            vim.treesitter.stop()
-            vim.lsp.semantic_tokens.start(args.buf, client.id)
-        end
-    end,
-})
-
+-- autocmd("LspAttach", {
+--     callback = function(args)
+--         local client = vim.lsp.get_client_by_id(args.data.client_id)
+--         if client and client.server_capabilities.semanticTokensProvider and client.name ~= "null-ls" then
+--             vim.treesitter.stop()
+--             vim.lsp.semantic_tokens.start(args.buf, client.id)
+--         end
+--     end,
+-- })
 
 command('LuaExprToFile', function(opts)
     local lines =

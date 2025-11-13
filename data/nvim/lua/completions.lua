@@ -77,7 +77,7 @@ return {
                     ),
                 })
             end
-            -- add('lua', 'test', 'foo $1 bar')
+            -- TODO: Define in files to be lazy-loaded per ft
             add(
                 'python',
                 'main',
